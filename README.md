@@ -54,5 +54,6 @@ Studio 界面会跟你 `schema.prisma` 里的模型定义保持同步，你改�
 - `npx shadcn@latest init`
 - `npm i @radix-ui/react-collapsible`
 
-
+### 代码规范格式化 prettier
+- `npm i --save-dev prettier prettier-plugin-tailwindcss`
 
