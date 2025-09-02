@@ -1,8 +1,7 @@
-import db from "@/lib/db";
-
-export default async function Home() {
-    const user = await db.user.findFirst();
+export default function Home() {
   return (
-      <>{JSON.stringify(user)}</>
+      <>
+          Home
+      </>
   );
 }
