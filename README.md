@@ -46,3 +46,13 @@ Studio 界面会跟你 `schema.prisma` 里的模型定义保持同步，你改�
 
 
 
+## 餐饮系统
+改了 `schema.prisma`, 不迁移，应用更改，执行 `npx prisma db push --force-reset`
+
+
+### 使用`shadcn`
+- `npx shadcn@latest init`
+- `npm i @radix-ui/react-collapsible`
+
+
+

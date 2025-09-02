@@ -15,4 +15,96 @@ model User {
   id        Int      @id @default(autoincrement())
   name      String
   email     String   @unique
+  password  String
+  meals     Meal[]
+  role      Role
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model Category {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  foods     Food[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Food {
+  id            Int      @id @default(autoincrement())
+  name          String   @unique
+  calories      Float?
+  protein       Float?
+  fat           Float?
+  carbohydrates Float?
+  fiber         Float?
+  sugar         Float?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  categoryId    Int?
+  category      Category? @relation(fields: [categoryId], references: [id])
+
+  foodServingUnit FoodServingUnit[]
+  servingUnit     ServingUnit[]
+  meal             Meal?             @relation(fields: [mealId], references: [id])
+  mealId           Int?
+  mealFood        MealFood[]
+}
+/**
+ * 计量单位
+ */
+model ServingUnit {
+  id              Int               @id @default(autoincrement())
+  name            String            @unique
+  foodServingUnit FoodServingUnit[]
+  food            Food?             @relation(fields: [foodId], references: [id])
+  foodId          Int?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  mealFood        MealFood[]
+}
+/**
+ * 食物份量
+ * 关联表， 用来关联食物和计量单位
+ */
+model FoodServingUnit {
+  id            Int         @id @default(autoincrement())
+  food          Food        @relation(fields: [foodId], references: [id])
+  foodId        Int
+  servingUnit   ServingUnit @relation(fields: [servingUnitId], references: [id])
+  servingUnitId Int
+  grams         Float?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model Meal {
+  id        Int      @id @default(autoincrement())
+  foods     Food[]
+  user      User?    @relation(fields: [userId], references: [id])
+  userId    Int?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  mealFood  MealFood[]
+}
+
+/**
+ * 餐食表
+ */
+model MealFood {
+  id        Int      @id @default(autoincrement())
+  food      Food     @relation(fields: [foodId], references: [id])
+  foodId    Int
+  meal      Meal     @relation(fields: [mealId], references: [id])
+  mealId    Int
+  servingUnit ServingUnit @relation(fields: [servingUnitId], references: [id])
+  servingUnitId Int
+  amount     Float?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
