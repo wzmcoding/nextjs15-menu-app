@@ -164,7 +164,7 @@ export default function DocsPage({params}: { params: { slug: string[] } }) {
 8. 特殊文件
 
    | 文件名 | 作用 |
-                                 | --------------- | -------------------------- |
+                                       | --------------- | -------------------------- |
    | `layout.tsx`    | 布局，作用域为当前文件夹及子路由 |
    | `template.tsx`  | 每次渲染都会重新挂载的布局 |
    | `loading.tsx`   | 页面加载中的占位内容 |
@@ -191,3 +191,11 @@ app/@main/page.tsx     -> 渲染 Main
 - `...slug`：捕获所有路径
 - 还有 `error.tsx`、`loading.tsx` 等提升体验
 - 你的项目 `admin/page.tsx` 对应 `/admin`，因为 `(dashboard)` 只是分组，不出现在路径中。
+
+## 布局组件实现
+
+```bash
+npx shadcn@latest add separator
+```
+
+
