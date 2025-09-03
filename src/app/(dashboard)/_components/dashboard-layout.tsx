@@ -128,47 +128,49 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   const [open, setOpen] = useState<boolean>(false);
 
   return (
-    <div className="bg-background fixed z-10 flex h-13 w-screen items-center justify-between border px-2">
-      <Collapsible.Root className="h-full" open={open} onOpenChange={setOpen}>
-        <Collapsible.Trigger className="m-2" asChild>
-          <Button size="icon" variant="outline">
-            <Menu />
-          </Button>
-        </Collapsible.Trigger>
-      </Collapsible.Root>
-      <div className="flex">
-        {/* ThemeToggle */}
-        <ThemeToggle />
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              variant="ghost"
-              className="flex h-9 items-center gap-2 px-2"
-            >
-              <Avatar className="size-8">
-                <AvatarFallback>A</AvatarFallback>
-              </Avatar>
-              <span className="hidden md:inline">admin</span>
+    <div className="flex">
+      <div className="bg-background fixed z-10 flex h-13 w-screen items-center justify-between border px-2">
+        <Collapsible.Root className="h-full" open={open} onOpenChange={setOpen}>
+          <Collapsible.Trigger className="m-2" asChild>
+            <Button size="icon" variant="outline">
+              <Menu />
             </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-56">
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <div className="flex items-center gap-3 px-2 py-1.5">
-              <Avatar className="size-10">
-                <AvatarFallback>N</AvatarFallback>
-              </Avatar>
-              <div>
-                <p className="text-sm font-medium">name</p>
-                <p className="text-muted-foreground text-xs">email</p>
+          </Collapsible.Trigger>
+        </Collapsible.Root>
+        <div className="flex">
+          {/* ThemeToggle */}
+          <ThemeToggle />
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="ghost"
+                className="flex h-9 items-center gap-2 px-2"
+              >
+                <Avatar className="size-8">
+                  <AvatarFallback>A</AvatarFallback>
+                </Avatar>
+                <span className="hidden md:inline">admin</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-56">
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <div className="flex items-center gap-3 px-2 py-1.5">
+                <Avatar className="size-10">
+                  <AvatarFallback>N</AvatarFallback>
+                </Avatar>
+                <div>
+                  <p className="text-sm font-medium">name</p>
+                  <p className="text-muted-foreground text-xs">email</p>
+                </div>
               </div>
-            </div>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem variant="destructive">
-              <LogOut className="size-4" /> Logout
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem variant="destructive">
+                <LogOut className="size-4" /> Logout
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
 
       <Collapsible.Root
@@ -197,6 +199,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
           </div>
         </Collapsible.Content>
       </Collapsible.Root>
+
       <main
         className={`transition-margin mt-13 flex-1 p-4 duration-300 ${open ? "ml-64" : "ml-0"}`}
       >
