@@ -164,7 +164,7 @@ export default function DocsPage({params}: { params: { slug: string[] } }) {
 8. 特殊文件
 
    | 文件名 | 作用 |
-                                       | --------------- | -------------------------- |
+                                          | --------------- | -------------------------- |
    | `layout.tsx`    | 布局，作用域为当前文件夹及子路由 |
    | `template.tsx`  | 每次渲染都会重新挂载的布局 |
    | `loading.tsx`   | 页面加载中的占位内容 |
@@ -198,4 +198,8 @@ app/@main/page.tsx     -> 渲染 Main
 npx shadcn@latest add separator
 ```
 
+### 动画库安装
 
+```bash
+npm install motion
+```
