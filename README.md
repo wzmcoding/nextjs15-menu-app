@@ -164,7 +164,7 @@ export default function DocsPage({params}: { params: { slug: string[] } }) {
 8. 特殊文件
 
    | 文件名 | 作用 |
-                                             | --------------- | -------------------------- |
+                                                                                                   | --------------- | -------------------------- |
    | `layout.tsx`    | 布局，作用域为当前文件夹及子路由 |
    | `template.tsx`  | 每次渲染都会重新挂载的布局 |
    | `loading.tsx`   | 页面加载中的占位内容 |
@@ -209,4 +209,85 @@ npm install motion
 ```bash
 npm i next-themes
 ```
+
+## react query 使用
+
+```bash
+npm i @tanstack/react-query
+```
+
+React Query 的主要目的是简化前端应用中对服务器数据的获取、缓存、同步和更新，让你不用再手写一堆
+`useEffect + fetch + useState`
+的样板代码，还能轻松处理加载、错误、缓存、重试、分页、预取等复杂场景。它就像是“数据状态管理器”，专注于“服务器状态”而非本地 UI
+状态。
+
+### 核心价值：
+
+1. 管理服务器状态
+
+- 服务器数据和本地 UI 状态不同，可能在多个页面共享，还会随着用户操作或后台变动而不断更新。
+- React Query 自动帮你缓存和同步这些数据，避免你在多个组件里重复发请求或手动维护数据。
+
+2. 自动缓存和数据同步
+
+- 同一请求只发一次，下次用缓存。
+- 切换页面回来时自动刷新（后台同步）。
+- 自动识别数据“是否过期”，过期就刷新，保持最新。
+
+3. 加载和错误状态管理
+
+- 它提供了 `isLoading`、`isError`、`isSuccess` 等状态，你不用自己维护 loading/error 变量了。
+
+4. 减少样板代码
+
+- 用 `useQuery` 一行搞定数据获取，不再写冗长的 `useEffect` 和 `useState`。
+
+5. 支持更多高级功能
+
+- 请求重试机制
+- 分页、无限滚动
+- 预取数据（Prefetch）
+- 乐观更新（Optimistic Update）
+- 服务端渲染（SSR）和静态生成（SSG）支持
+
+简单例子：
+
+```tsx
+import {useQuery} from '@tanstack/react-query'
+import axios from 'axios'
+
+async function fetchUser() {
+    const {data} = await axios.get('/api/user')
+    return data
+}
+
+function UserInfo() {
+    const {data, isLoading, error} = useQuery({
+        queryKey: ['user'], // 缓存和识别数据的key
+        queryFn: fetchUser, // 请求函数
+    })
+
+    if (isLoading) return <p>加载中...</p>
+    if (error) return <p>出错了</p>
+
+    return (
+        <div>
+            <h1>{data.name}</h1>
+            <p>{data.email}</p>
+        </div>
+    )
+}
+
+```
+
+一句话总结：
+**React Query 的目的就是让前端开发者专注业务逻辑，不再被数据请求和状态同步的细节拖累，实现“自动化的数据获取和缓存管理”**
+
+## 错误处理，鉴权
+
+```bash
+npm i zod zod-validation-error next-auth@beta
+```
+
+
 
